@@ -1,9 +1,0 @@
-.personalContainer {
-    display: flex;
-    flex-direction: column;
-}
-
-.personalForm {
-    position: absolute;
-    display: none;
-}

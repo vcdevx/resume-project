@@ -14,12 +14,12 @@ class Education extends Component {
             cityState: '',
             education: [{
                 id: uniqid(),
-                degree: '',
-                major: '',
-                gpa: '',
-                school: '',
-                term: '',
-                cityState: '',
+                degree: 'BS',
+                major: 'Computer Science',
+                gpa: '4.0 GPA',
+                school: 'Virginia Polytechnic Institute',
+                term: 'May 2015',
+                cityState: 'Blacksburg, VA',
             }],
             add: false,
         }
@@ -68,6 +68,7 @@ class Education extends Component {
     }
 
     submitAddEducation = e => {
+        e.preventDefault();
         this.setState({
             education: this.state.education.concat({
                 id: uniqid(),

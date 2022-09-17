@@ -1,6 +1,6 @@
 
 import React, { Component } from "react";
-import '../styles/Personal.css';
+
 
 class Contact extends Component {
 

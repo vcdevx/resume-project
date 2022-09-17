@@ -1,17 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/index.css';
-import App from './App';
-import Contact from './components/Contact';
-import Header from './components/Header';
-import Education from './components/Education';
+import Resume from './components/Resume'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Header />
-    <Contact />
-    <Education />
+    <Resume />
   </React.StrictMode>
 );
 
