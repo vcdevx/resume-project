@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './styles/index.css';
 import Resume from './components/Resume'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
