@@ -1,75 +1,59 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-class Header extends Component {
-  constructor() {
-    super();
+function Header() {
+  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
+  const [edit, setEdit] = useState(false);
 
-    this.state = {
-      name: "",
-      title: "",
-      edit: false,
-    };
-  }
-
-  handleNameChange = (e) => {
-    this.setState({
-      name: e.target.value,
-    });
+  const handleNameChange = (e) => {
+    setName(e.target.value);
   };
 
-  handleTitleChange = (e) => {
-    this.setState({
-      title: e.target.value,
-    });
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
   };
 
-  toggleEdit = () => {
-    this.setState((prevState) => ({
-      edit: !prevState.edit,
-    }));
+  const toggleEdit = () => {
+    setEdit(!edit);
   };
 
-  render() {
-    const { name, title, edit } = this.state;
+  return (
+    <div class="header">
+      <h1 className="name">{name ? name : "Your Name"}</h1>
+      <h2>{title ? title : "Job Title"}</h2>
+      <button
+        type="button"
+        className="headerEditBtn"
+        onClick={() => toggleEdit()}
+      >
+        Edit
+      </button>
 
-    return (
-      <div class="header">
-        <h1 className="name">{name ? name : "Your Name"}</h1>
-        <h2>{title ? title : "Job Title"}</h2>
-        <button
-          type="button"
-          className="headerEditBtn"
-          onClick={this.toggleEdit}
-        >
-          Edit
-        </button>
-
-        {edit && (
-          <form>
-            <label htmlFor="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              value={this.state.name}
-              onChange={this.handleNameChange}
-              required
-            />
-            <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              id="title"
-              value={this.state.title}
-              onChange={this.handleTitleChange}
-              required
-            />
-            <button type="button" onClick={this.toggleEdit}>
-              Done
-            </button>
-          </form>
-        )}
-      </div>
-    );
-  }
+      {edit && (
+        <form>
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={() => handleNameChange()}
+            required
+          />
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            id="title"
+            value={title}
+            onChange={() => handleTitleChange()}
+            required
+          />
+          <button type="button" onClick={() => toggleEdit()}>
+            Done
+          </button>
+        </form>
+      )}
+    </div>
+  );
 }
 
 export default Header;

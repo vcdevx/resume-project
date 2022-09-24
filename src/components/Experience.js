@@ -1,187 +1,172 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import uniqid from "uniqid";
 
-class Experience extends Component {
-  constructor() {
-    super();
+function Experience() {
+  const [title, setTitle] = useState("");
+  const [company, setCompany] = useState("");
+  const [tenure, setTenure] = useState("");
+  const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
 
-    this.state = {
-      experience: [
-        {
-          id: uniqid(),
-          title: "Senior Frontend Developer",
-          company: "Capsule Corp",
-          tenure: "July 2021 - Current",
-          location: "Atlanta, GA",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae luctus magna. Pellentesque dapibus porttitor sapien, id bibendum massa finibus et. Maecenas non cursus mi. Aenean ut velit vitae orci cursus tristique nec vel ex. Aliquam et dolor ut neque feugiat lobortis sed sed lectus. Duis varius aliquam enim, et aliquet nunc volutpat sit amet. Suspendisse potenti. Maecenas pellentesque est nec mauris ultricies placerat. Aenean auctor lectus vitae mattis rutrum. Cras congue blandit lacus vitae lobortis. Etiam pharetra risus sit amet hendrerit tristique.",
-        },
-        {
-          id: uniqid(),
-          title: "Frontend Developer",
-          company: "Acme Corp",
-          tenure: "May 2017 - July 2021",
-          location: "Atlanta, GA",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae luctus magna. Pellentesque dapibus porttitor sapien, id bibendum massa finibus et. Maecenas non cursus mi. Aenean ut velit vitae orci cursus tristique nec vel ex. Aliquam et dolor ut neque feugiat lobortis sed sed lectus. Duis varius aliquam enim, et aliquet nunc volutpat sit amet. Suspendisse potenti. Maecenas pellentesque est nec mauris ultricies placerat. Aenean auctor lectus vitae mattis rutrum. Cras congue blandit lacus vitae lobortis. Etiam pharetra risus sit amet hendrerit tristique.",
-        },
-        {
-          id: uniqid(),
-          title: "Jr Frontend Developer",
-          company: "Burger World Corp",
-          tenure: "March 2015 - May 2017",
-          location: "Atlanta, GA",
-          description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae luctus magna. Pellentesque dapibus porttitor sapien, id bibendum massa finibus et. Maecenas non cursus mi. Aenean ut velit vitae orci cursus tristique nec vel ex. Aliquam et dolor ut neque feugiat lobortis sed sed lectus. Duis varius aliquam enim, et aliquet nunc volutpat sit amet. Suspendisse potenti. Maecenas pellentesque est nec mauris ultricies placerat. Aenean auctor lectus vitae mattis rutrum. Cras congue blandit lacus vitae lobortis. Etiam pharetra risus sit amet hendrerit tristique.",
-        },
-      ],
-      add: false,
-    };
-  }
+  const [experience, setExperience] = useState([
+    {
+      id: uniqid(),
+      title: "Senior Frontend Developer",
+      company: "Capsule Corp",
+      tenure: "July 2021 - Current",
+      location: "Atlanta, GA",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae luctus magna. Pellentesque dapibus porttitor sapien, id bibendum massa finibus et. Maecenas non cursus mi. Aenean ut velit vitae orci cursus tristique nec vel ex. Aliquam et dolor ut neque feugiat lobortis sed sed lectus. Duis varius aliquam enim, et aliquet nunc volutpat sit amet. Suspendisse potenti. Maecenas pellentesque est nec mauris ultricies placerat. Aenean auctor lectus vitae mattis rutrum. Cras congue blandit lacus vitae lobortis. Etiam pharetra risus sit amet hendrerit tristique.",
+    },
+    {
+      id: uniqid(),
+      title: "Frontend Developer",
+      company: "Acme Corp",
+      tenure: "May 2017 - July 2021",
+      location: "Atlanta, GA",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae luctus magna. Pellentesque dapibus porttitor sapien, id bibendum massa finibus et. Maecenas non cursus mi. Aenean ut velit vitae orci cursus tristique nec vel ex. Aliquam et dolor ut neque feugiat lobortis sed sed lectus. Duis varius aliquam enim, et aliquet nunc volutpat sit amet. Suspendisse potenti. Maecenas pellentesque est nec mauris ultricies placerat. Aenean auctor lectus vitae mattis rutrum. Cras congue blandit lacus vitae lobortis. Etiam pharetra risus sit amet hendrerit tristique.",
+    },
+    {
+      id: uniqid(),
+      title: "Jr Frontend Developer",
+      company: "Burger World Corp",
+      tenure: "March 2015 - May 2017",
+      location: "Atlanta, GA",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vitae luctus magna. Pellentesque dapibus porttitor sapien, id bibendum massa finibus et. Maecenas non cursus mi. Aenean ut velit vitae orci cursus tristique nec vel ex. Aliquam et dolor ut neque feugiat lobortis sed sed lectus. Duis varius aliquam enim, et aliquet nunc volutpat sit amet. Suspendisse potenti. Maecenas pellentesque est nec mauris ultricies placerat. Aenean auctor lectus vitae mattis rutrum. Cras congue blandit lacus vitae lobortis. Etiam pharetra risus sit amet hendrerit tristique.",
+    },
+  ]);
 
-  toggleAddExperience = () => {
-    this.setState((prevState) => ({
-      add: !prevState.add,
-    }));
+  const [add, setAdd] = useState(false);
+
+  const toggleAddExperience = () => {
+    setAdd(!add);
   };
 
-  handleTitleChange = (e) => {
-    this.setState({
-      title: e.target.value,
-    });
+  const handleTitleChange = (e) => {
+    title = e.target.value;
   };
 
-  handleCompanyChange = (e) => {
-    this.setState({
-      company: e.target.value,
-    });
+  const handleCompanyChange = (e) => {
+    company = e.target.value;
   };
 
-  handleTenureChange = (e) => {
-    this.setState({
-      tenure: e.target.value,
-    });
+  const handleTenureChange = (e) => {
+    tenure = e.target.value;
   };
 
-  handleLocationChange = (e) => {
-    this.setState({
-      location: e.target.value,
-    });
+  const handleLocationChange = (e) => {
+    location = e.target.value;
   };
 
-  handleDescriptionChange = (e) => {
-    this.setState({
-      description: e.target.value,
-    });
+  const handleDescriptionChange = (e) => {
+    description = e.target.value;
   };
 
-  submitAddExperience = (e) => {
+  const submitAddExperience = (e) => {
     e.preventDefault();
-    this.setState({
-      experience: this.state.experience.concat({
+    setExperience({
+      experience: experience.concat({
         id: uniqid(),
-        title: this.state.title,
-        company: this.state.company,
-        tenure: this.state.tenure,
-        location: this.state.location,
-        description: this.state.description,
+        title: title,
+        company: company,
+        tenure: tenure,
+        location: location,
+        description: description,
       }),
-      title: "",
-      company: "",
-      tenure: "",
-      location: "",
-      description: "",
     });
 
-    this.toggleAddExperience();
+    setTitle("");
+    setCompany("");
+    setTenure("");
+    setLocation("");
+    setDescription("");
+
+    toggleAddExperience();
   };
 
-  handleRemove = (key) => {
-    const newExperience = this.state.experience.filter(
+  const handleRemove = (key) => {
+    const newExperience = experience.filter(
       (experience) => experience.id !== key
     );
 
-    this.setState({
+    setExperience({
       experience: newExperience,
     });
   };
 
-  render() {
-    const { experience, company, title, tenure, location, description, add } =
-      this.state;
-
-    return (
-      <div className="experienceContainer">
-        <h2 className="experience">Work Experience</h2>
-        {experience.map((job) => {
-          return (
-            <div
-              className="job"
-              key={job.id}
-              onClick={() => this.handleRemove(job.id)}
-            >
-              <h4>{job.title}</h4>
-              <p>{job.company}</p>
-              <p>
-                {job.tenure} / {job.location}
-              </p>
-              <p>{job.description}</p>
-            </div>
-          );
-        })}
-        <button
-          onClick={this.toggleAddExperience}
-          className="experienceEditBtn"
-          type="button"
-        >
-          Add
-        </button>
-        {add && (
-          <form>
-            <label htmlFor="title">Title</label>
-            <input
-              type="text"
-              id="title"
-              onChange={this.handleTitleChange}
-              value={title}
-            />
-            <label htmlFor="company">Company</label>
-            <input
-              type="text"
-              onChange={this.handleCompanyChange}
-              value={company}
-            />
-            <label htmlFor="tenure">Tenure</label>
-            <input
-              type="text"
-              onChange={this.handleTenureChange}
-              value={tenure}
-            />
-            <label htmlFor="location">Location</label>
-            <input
-              type="text"
-              onChange={this.handleLocationChange}
-              value={location}
-            />
-            <label htmlFor="description">Description</label>
-            <textarea
-              type="textArea"
-              onChange={this.handleDescriptionChange}
-              value={description}
-            ></textarea>
-            <div className="buttonContainer">
-              <button type="button" onClick={this.submitAddExperience}>
-                Done
-              </button>
-              <button type="button" onClick={this.toggleAddExperience}>
-                Close
-              </button>
-            </div>
-          </form>
-        )}
-      </div>
-    );
-  }
+  return (
+    <div className="experienceContainer">
+      <h2 className="experience">Work Experience</h2>
+      {experience.map((job) => {
+        return (
+          <div
+            className="job"
+            key={job.id}
+            onClick={() => handleRemove(job.id)}
+          >
+            <h4>{job.title}</h4>
+            <p>{job.company}</p>
+            <p>
+              {job.tenure} / {job.location}
+            </p>
+            <p>{job.description}</p>
+          </div>
+        );
+      })}
+      <button
+        onClick={() => toggleAddExperience()}
+        className="experienceEditBtn"
+        type="button"
+      >
+        Add
+      </button>
+      {add && (
+        <form>
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            id="title"
+            onChange={() => handleTitleChange()}
+            value={title}
+          />
+          <label htmlFor="company">Company</label>
+          <input
+            type="text"
+            onChange={() => handleCompanyChange()}
+            value={company}
+          />
+          <label htmlFor="tenure">Tenure</label>
+          <input
+            type="text"
+            onChange={() => handleTenureChange()}
+            value={tenure}
+          />
+          <label htmlFor="location">Location</label>
+          <input
+            type="text"
+            onChange={() => handleLocationChange()}
+            value={location}
+          />
+          <label htmlFor="description">Description</label>
+          <textarea
+            type="textArea"
+            onChange={() => handleDescriptionChange()}
+            value={description}
+          ></textarea>
+          <div className="buttonContainer">
+            <button type="button" onClick={() => submitAddExperience()}>
+              Done
+            </button>
+            <button type="button" onClick={() => toggleAddExperience()}>
+              Close
+            </button>
+          </div>
+        </form>
+      )}
+    </div>
+  );
 }
 
 export default Experience;

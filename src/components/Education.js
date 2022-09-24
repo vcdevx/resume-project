@@ -1,77 +1,57 @@
-import { Component } from "react";
+import React, { useState, useEffect } from "react";
 import uniqid from "uniqid";
 
-class Education extends Component {
-  constructor() {
-    super();
+function Education() {
+  const [degree, setDegree] = useState("");
+  const [major, setMajor] = useState("");
+  const [gpa, setGpa] = useState("");
+  const [school, setSchool] = useState("");
+  const [term, setTerm] = useState("");
+  const [cityState, setCityState] = useState("");
+  const [education, setEducation] = useState([
+    {
+      id: uniqid(),
+      degree: "BS",
+      major: "Computer Science",
+      gpa: "4.0 GPA",
+      school: "Virginia Polytechnic Institute",
+      term: "May 2015",
+      cityState: "Blacksburg, VA",
+    },
+  ]);
+  const [add, setAdd] = useState(false);
 
-    this.state = {
-      degree: "",
-      major: "",
-      gpa: "",
-      school: "",
-      term: "",
-      cityState: "",
-      education: [
-        {
-          id: uniqid(),
-          degree: "BS",
-          major: "Computer Science",
-          gpa: "4.0 GPA",
-          school: "Virginia Polytechnic Institute",
-          term: "May 2015",
-          cityState: "Blacksburg, VA",
-        },
-      ],
-      add: false,
-    };
-  }
-
-  handleDegreeChange = (e) => {
-    this.setState({
-      degree: e.target.value,
-    });
+  const handleDegreeChange = (e) => {
+    setDegree(e.target.value);
   };
 
-  handleMajorChange = (e) => {
-    this.setState({
-      major: e.target.value,
-    });
+  const handleMajorChange = (e) => {
+    setMajor(e.target.value);
   };
 
-  handleGpaChange = (e) => {
-    this.setState({
-      gpa: e.target.value,
-    });
+  const handleGpaChange = (e) => {
+    setGpa(e.target.value);
   };
 
-  handleSchoolChange = (e) => {
-    this.setState({
-      school: e.target.value,
-    });
+  const handleSchoolChange = (e) => {
+    setSchool(e.target.value);
   };
 
-  handleTermChange = (e) => {
-    this.setState({
-      term: e.target.value,
-    });
+  const handleTermChange = (e) => {
+    setTerm(e.target.value);
   };
 
-  handleCityStateChange = (e) => {
-    this.setState({
-      cityState: e.target.value,
-    });
+  const handleCityStateChange = (e) => {
+    setCityState(e.target.value);
   };
 
-  toggleAddEducation = () => {
-    this.setState((prevState) => ({
-      add: !prevState.add,
-    }));
+  const toggleAddEducation = (e) => {
+    setAdd(!add);
   };
 
-  submitAddEducation = (e) => {
+  const submitAddEducation = (e) => {
     e.preventDefault();
-    this.setState({
+    setEducation({
       education: this.state.education.concat({
         id: uniqid(),
         degree: this.state.degree,
@@ -89,110 +69,103 @@ class Education extends Component {
       cityState: "",
     });
 
-    this.toggleAddEducation();
+    toggleAddEducation();
   };
 
-  handleRemove = (key) => {
-    const newEducation = this.state.education.filter(
-      (education) => education.id !== key
-    );
+  const handleRemove = (key) => {
+    const newEducation = education.filter((education) => education.id !== key);
 
-    this.setState({
+    setEducation({
       education: newEducation,
     });
   };
 
-  render() {
-    const { degree, major, gpa, school, term, cityState, education, add } =
-      this.state;
-
-    return (
-      <div className="education">
-        <h2>Education</h2>
-        {education.map((edu) => {
-          return (
-            <div
-              key={edu.id}
-              onClick={() => this.handleRemove(edu.id)}
-              className="edu"
-            >
-              <p className="degree">{edu.degree}</p>
-              <p className="major">{edu.major}</p>
-              <p className="gpa">{edu.gpa}</p>
-              <p className="school">{edu.school}</p>
-              <p className="term">{edu.term}</p>
-              <p className="cityState">{edu.cityState}</p>
-            </div>
-          );
-        })}
-        <button
-          type="button"
-          className="educationEditBtn"
-          onClick={this.toggleAddEducation}
-        >
-          Add
-        </button>
-        {add && (
-          <form>
-            <label htmlFor="degree">Degree</label>
-            <input
-              type="text"
-              id="degree"
-              onChange={this.handleDegreeChange}
-              value={degree}
-              required
-            />
-            <label htmlFor="major">Major</label>
-            <input
-              type="text"
-              id="major"
-              onChange={this.handleMajorChange}
-              value={major}
-              required
-            />
-            <label htmlFor="gpa">GPA</label>
-            <input
-              type="text"
-              id="gpa"
-              onChange={this.handleGpaChange}
-              value={gpa}
-              required
-            />
-            <label htmlFor="school">School</label>
-            <input
-              type="text"
-              id="school"
-              onChange={this.handleSchoolChange}
-              value={school}
-              required
-            />
-            <label htmlFor="term">Term</label>
-            <input
-              type="text"
-              id="term"
-              onChange={this.handleTermChange}
-              value={term}
-              required
-            />
-            <label htmlFor="cityState">City/State</label>
-            <input
-              type="text"
-              id="cityState"
-              onChange={this.handleCityStateChange}
-              value={cityState}
-              required
-            />
-            <button type="submit" onClick={this.submitAddEducation}>
-              Done
-            </button>
-            <button type="button" onClick={this.toggleAddEducation}>
-              Close
-            </button>
-          </form>
-        )}
-      </div>
-    );
-  }
+  return (
+    <div className="education">
+      <h2>Education</h2>
+      {education.map((edu) => {
+        return (
+          <div
+            key={edu.id}
+            onClick={() => handleRemove(edu.id)}
+            className="edu"
+          >
+            <p className="degree">{edu.degree}</p>
+            <p className="major">{edu.major}</p>
+            <p className="gpa">{edu.gpa}</p>
+            <p className="school">{edu.school}</p>
+            <p className="term">{edu.term}</p>
+            <p className="cityState">{edu.cityState}</p>
+          </div>
+        );
+      })}
+      <button
+        type="button"
+        className="educationEditBtn"
+        onClick={() => toggleAddEducation()}
+      >
+        Add
+      </button>
+      {add && (
+        <form>
+          <label htmlFor="degree">Degree</label>
+          <input
+            type="text"
+            id="degree"
+            onChange={() => handleDegreeChange()}
+            value={degree}
+            required
+          />
+          <label htmlFor="major">Major</label>
+          <input
+            type="text"
+            id="major"
+            onChange={() => handleMajorChange()}
+            value={major}
+            required
+          />
+          <label htmlFor="gpa">GPA</label>
+          <input
+            type="text"
+            id="gpa"
+            onChange={() => handleGpaChange()}
+            value={gpa}
+            required
+          />
+          <label htmlFor="school">School</label>
+          <input
+            type="text"
+            id="school"
+            onChange={() => handleSchoolChange()}
+            value={school}
+            required
+          />
+          <label htmlFor="term">Term</label>
+          <input
+            type="text"
+            id="term"
+            onChange={() => handleTermChange()}
+            value={term}
+            required
+          />
+          <label htmlFor="cityState">City/State</label>
+          <input
+            type="text"
+            id="cityState"
+            onChange={() => handleCityStateChange()}
+            value={cityState}
+            required
+          />
+          <button type="submit" onClick={() => submitAddEducation()}>
+            Done
+          </button>
+          <button type="button" onClick={() => toggleAddEducation()}>
+            Close
+          </button>
+        </form>
+      )}
+    </div>
+  );
 }
 
 export default Education;

@@ -1,50 +1,32 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
-class Contact extends Component {
-  constructor(props) {
-    super(props);
+function Contact() {
 
-    this.state = {
-      email: "",
-      phone: "",
-      cityState: "",
-      linkedIn: "",
-      edit: false,
-    };
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [cityState, setCityState] = useState('');
+    const [linkedIn, setLinkedIn] = useState('');
+    const [edit, setEdit] = useState(false);
+
+  const handlePhoneChange = (e) => {
+    setPhone(e.target.value);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleCityStateChange = (e) => {
+    setCityState(e.target.value);
+  };
+
+  const handleLinkedInChange = (e) => {
+    setLinkedIn(e.target.value);
+  };
+
+  const toggleEdit = () => {
+    setEdit(!edit)
   }
-
-  handlePhoneChange = (e) => {
-    this.setState({
-      phone: e.target.value,
-    });
-  };
-
-  handleEmailChange = (e) => {
-    this.setState({
-      email: e.target.value,
-    });
-  };
-
-  handleCityStateChange = (e) => {
-    this.setState({
-      cityState: e.target.value,
-    });
-  };
-
-  handleLinkedInChange = (e) => {
-    this.setState({
-      linkedInState: e.target.value,
-    });
-  };
-
-  toggleEdit = () => {
-    this.setState((prevState) => ({
-      edit: !prevState.edit,
-    }));
-  };
-
-  render() {
-    const { phone, email, cityState, linkedIn, edit } = this.state;
 
     return (
       <div className="contact">
@@ -56,7 +38,7 @@ class Contact extends Component {
         <button
           className="contactEditBtn"
           type="button"
-          onClick={this.toggleEdit}
+          onClick={() => toggleEdit()}
         >
           Edit
         </button>
@@ -67,42 +49,41 @@ class Contact extends Component {
             <input
               type="text"
               id="phone"
-              value={this.state.phone}
-              onChange={this.handlePhoneChange}
+              value={phone}
+              onChange={() => handlePhoneChange()}
               required
             />
             <label htmlFor="email">E-Mail</label>
             <input
               type="email"
               id="email"
-              value={this.state.email}
-              onChange={this.handleEmailChange}
+              value={email}
+              onChange={() => handleEmailChange()}
               required
             />
             <label htmlFor="cityState">City, State</label>
             <input
               type="text"
               id="cityState"
-              value={this.state.cityState}
-              onChange={this.handleCityStateChange}
+              value={cityState}
+              onChange={() => handleCityStateChange()}
               required
             />
             <label htmlFor="linkedIn">linkedIn URL</label>
             <input
               type="text"
               id="linkedIn"
-              value={this.state.linkedIn}
-              onChange={this.handleLinkedInChange}
+              value={linkedIn}
+              onChange={() => handleLinkedInChange()}
               required
             />
-            <button type="button" onClick={this.toggleEdit}>
+            <button type="button" onClick={() => toggleEdit()}>
               Done
             </button>
           </form>
         )}
       </div>
     );
-  }
 }
 
 export default Contact;
